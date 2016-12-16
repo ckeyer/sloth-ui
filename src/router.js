@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import localStore from './utils/localStore'
+
 import Login from './components/account/Login'
 import LoginOtherWay from './components/account/LoginOtherWay'
 import LoginUser from './components/account/LoginUser'
@@ -52,6 +54,17 @@ const router = new VueRouter({
       ]
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login' && to.path !== '/login/others') {
+    let ua = localStore.getItem('sloth.user_auth')
+    if (!ua) {
+      console.log('should login')
+      next('/login')
+    }
+  }
+  next()
 })
 
 export default router

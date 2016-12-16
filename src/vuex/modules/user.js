@@ -1,5 +1,4 @@
 import * as types from '../types'
-import localStore from '../../utils/localStore'
 
 const state = {
   id: ''
@@ -10,23 +9,21 @@ const getters = {
 
 const actions = {
   setAccount ({ commit }, user) {
-    commit(types.SET_ACCOUNT, { user })
+    commit(types.SET_USER, { user })
   },
   removeAccount ({ commit }) {
-    commit(types.REMOVE_ACCOUNT)
+    commit(types.REMOVE_USER)
   }
 }
 
 const mutations = {
-  [types.SET_ACCOUNT] (state, {user}) {
+  [types.SET_USER] (state, {user}) {
     for (var k in user) {
       state[k] = user[k]
     }
-    localStore.setItem('sloth.user', user)
   },
-  [types.REMOVE_ACCOUNT] (state) {
+  [types.REMOVE_USER] (state) {
     state = null
-    localStore.rmItem('sloth.user')
   }
 }
 

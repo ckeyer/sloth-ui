@@ -49,8 +49,8 @@ export default {
           return
         }
 
-        vm.$store.dispatch('setAccount', resp.body.user)
         vm.$store.dispatch('setUserAuth', resp.body.user_auth)
+        vm.$store.dispatch('setAccount', resp.body.user)
         vm.$router.push('/')
       })
     },
@@ -64,11 +64,11 @@ export default {
     logout: function () {
       let vm = this
       api.logout().end(function (err, resp) {
+        vm.$store.dispatch('removeAccount')
+        vm.$store.dispatch('removeUserAuth')
         if (!err || !Alert.check(vm, resp)) {
           return
         }
-        vm.$store.dispatch('removeAccount')
-        vm.$store.dispatch('removeUserAuth')
         vm.$router.push('/login')
       })
     }

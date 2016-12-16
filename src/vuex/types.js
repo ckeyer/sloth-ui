@@ -1,5 +1,5 @@
-export const SET_ACCOUNT = 'SET_ACCOUNT'
-export const REMOVE_ACCOUNT = 'REMOVE_ACCOUNT'
+export const SET_USER = 'SET_USER'
+export const REMOVE_USER = 'REMOVE_USER'
 
 export const SET_USER_AUTH = 'SET_USER_AUTH'
 export const REMOVE_USER_AUTH = 'REMOVE_USER_AUTH'

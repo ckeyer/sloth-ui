@@ -19,14 +19,16 @@ const actions = {
 
 const mutations = {
   [types.SET_USER_AUTH] (state, {userauth}) {
+    localStore.setItem('sloth.user_auth', userauth)
+    console.log('set user_auth', userauth)
     for (var k in userauth) {
       state[k] = userauth[k]
     }
-    localStore.setItem('sloth.user_auth', userauth)
   },
   [types.REMOVE_USER_AUTH] (state) {
-    state = null
+    console.log('remove user_auth')
     localStore.rmItem('sloth.user_auth')
+    state = null
   }
 }
 
