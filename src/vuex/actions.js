@@ -1,10 +1,10 @@
-import {
+// import {
   // USERINFO_SUCCESS,
   // USERINFO_FAILURE,
-  SET_ACCOUNT
+  // SET_ACCOUNT
   // UPDATE_DEVICES
-} from './types'
+// } from './types'
 
-export const setAccount = ({ dispatch }, account) => {
-  dispatch(SET_ACCOUNT, account)
-}
+// export const setAccount = ({ dispatch }, user) => {
+//   dispatch(SET_ACCOUNT, user)
+// }

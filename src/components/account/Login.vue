@@ -36,10 +36,6 @@ export default {
       logo_name: 'Sloth'
     }
   },
-  ready: function () {
-    console.log('hello', this)
-    console.log('router', this.$route)
-  },
   computed: {
     isUser: function () {
       return this.$route.path === '/login'

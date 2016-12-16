@@ -10,12 +10,14 @@
     </div>
     <button type="submit" class="btn btn-primary" :class="{disabled: !allowSubmit}" @click="login">登入</button>
     <button type="submit" class="btn btn-primary" @click="ping">Ping</button>
+    <button type="submit" class="btn btn-primary" @click="logout">Logout</button>
     <router-link :to="{path:'/resetpassword'}"><small>找回密码</small></router-link>
   </div>
 </template>
 
 <script>
-import {setAccount} from '../../vuex/actions'
+// import { mapActions } from 'vuex'
+
 import api from '../../api/api'
 import Alert from '../../utils/alert'
 
@@ -27,10 +29,6 @@ export default {
       email: '',
       password: ''
     }
-  },
-  created: function () {
-    console.log('hello', this)
-    console.log('router', this.$route)
   },
   computed: {
     allowSubmit: function () {
@@ -44,11 +42,16 @@ export default {
         password: this.password
       }
       console.log('login.', body)
+
+      let vm = this
       api.login(body).end(function (err, resp) {
-        if (err) {
-          Alert.error(err, '请求错误')
+        if (err || !Alert.check(vm, resp)) {
+          return
         }
-        console.log('post login', err, resp)
+
+        vm.$store.dispatch('setAccount', resp.body.user)
+        vm.$store.dispatch('setUserAuth', resp.body.user_auth)
+        vm.$router.push('/')
       })
     },
     ping: function () {
@@ -58,8 +61,16 @@ export default {
         Alert.success(resp.body.message)
       })
     },
-    none: function () {
-      setAccount(this.$store)
+    logout: function () {
+      let vm = this
+      api.logout().end(function (err, resp) {
+        if (!err || !Alert.check(vm, resp)) {
+          return
+        }
+        vm.$store.dispatch('removeAccount')
+        vm.$store.dispatch('removeUserAuth')
+        vm.$router.push('/login')
+      })
     }
   }
 }

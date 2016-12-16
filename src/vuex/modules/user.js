@@ -1,51 +1,38 @@
-import {
-  USERINFO_SUCCESS,
-  USERINFO_FAILURE,
-  SET_ACCOUNT,
-  UPDATE_DEVICES
-} from '../types'
+import * as types from '../types'
+import localStore from '../../utils/localStore'
 
 const state = {
-  id: '',
-  nicename: '',
-  email: '',
-  phone: '',
-  devices: [],
-  passphrase: '',
-  state: null,
-  logined: false
+  id: ''
+}
+
+const getters = {
+}
+
+const actions = {
+  setAccount ({ commit }, user) {
+    commit(types.SET_ACCOUNT, { user })
+  },
+  removeAccount ({ commit }) {
+    commit(types.REMOVE_ACCOUNT)
+  }
 }
 
 const mutations = {
-  [USERINFO_SUCCESS] (state, action) {
-    state.state = action.state
-  },
-  [USERINFO_FAILURE] (state, action) {
-    state.state = 'failed state'
-  },
-  [SET_ACCOUNT] (state, account) {
-    if (account !== null) {
-      account.logined = true
+  [types.SET_ACCOUNT] (state, {user}) {
+    for (var k in user) {
+      state[k] = user[k]
     }
-    // console.log('set account', state)
-    for (var k in account) {
-      state[k] = account[k]
-    }
-    state.logined = true
+    localStore.setItem('sloth.user', user)
   },
-  [UPDATE_DEVICES] (state, device) {
-    console.log('update...', device)
-    for (var index in state.devices) {
-      if (index.id === device.id) {
-        state.devices.set(index, device)
-        return
-      }
-    }
-    state.devices.push(device)
+  [types.REMOVE_ACCOUNT] (state) {
+    state = null
+    localStore.rmItem('sloth.user')
   }
 }
 
 export default {
   state,
+  getters,
+  actions,
   mutations
 }

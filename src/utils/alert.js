@@ -28,5 +28,20 @@ export default {
       console.log('warn', title, content)
     }
     toastr.warning(content, title)
+  },
+  // check http response.
+  check: (vm, resp) => {
+    if (resp) {
+      if (resp.status >= 200 && resp.status < 300) {
+        return true
+      } else if (resp.status === 401) {
+        vm.$router.push('/login')
+      } else {
+        toastr.error(resp.body.error, '请求错误')
+      }
+    } else {
+      toastr.error('连接到服务器失败', '连接错误')
+    }
+    return false
   }
 }

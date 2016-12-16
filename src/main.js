@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 import router from './router'
+import store from './vuex/store'
 import App from './App'
 
 // CSS
@@ -19,6 +20,7 @@ Vue.config.warnExpressionErrors = false
 new Vue({
   router,
   el: '#app',
+  store,
   template: '<App/>',
   components: { App }
 })
