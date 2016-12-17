@@ -34,5 +34,9 @@ export default {
     return request.delete('/logout')
       .use(prefix)
       .use(setSlothToken)
+  },
+  getGHAccessURL: () => {
+    return request.get('/github/access_url')
+      .use(prefix)
   }
 }

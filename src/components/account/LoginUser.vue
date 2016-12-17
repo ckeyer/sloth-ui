@@ -14,8 +14,6 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
-
 import api from '../../api/api'
 import Alert from '../../utils/alert'
 
