@@ -24,6 +24,10 @@ export default {
     return request.get('/_ping')
       .use(prefix)
   },
+  status: () => {
+    return request.get('/status')
+      .use(prefix)
+  },
   login: (body) => {
     return request.post('/login')
       .send(body)
@@ -38,5 +42,11 @@ export default {
   getGHAccessURL: () => {
     return request.get('/github/access_url')
       .use(prefix)
+  },
+  signup: (body) => {
+    return request.post('/signup')
+      .send(body)
+      .use(prefix)
+      .set('Accept', 'application/json')
   }
 }

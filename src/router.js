@@ -57,7 +57,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/login' && to.path !== '/login/others') {
+  if (to.path !== '/login' &&
+    to.path !== '/login/others' &&
+    to.path !== '/signup') {
     let ua = localStore.getItem('sloth.user_auth')
     if (!ua) {
       console.log('should login')

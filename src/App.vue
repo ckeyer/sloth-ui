@@ -3,8 +3,24 @@
 </template>
 
 <script>
+import api from './api/api'
+import Alert from './utils/alert'
+
 export default {
-  name: 'app'
+  name: 'app',
+  created: function () {
+    let vm = this
+    api.status().end(function (err, resp) {
+      if (err) {
+        Alert('服务器错误', '请求错误')
+        return
+      }
+
+      if (resp.body.user === 0) {
+        vm.$router.push('/signup')
+      }
+    })
+  }
 }
 </script>
 

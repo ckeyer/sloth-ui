@@ -27,7 +27,6 @@ export default {
         vm.$router.push('/login')
         return
       }
-      console.log('access_url', resp.body.message)
       vm.ghAccessURL = resp.body.message
     })
   }
