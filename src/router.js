@@ -3,18 +3,21 @@ import VueRouter from 'vue-router'
 
 import localStore from './utils/localStore'
 
+import Main from './components/Main'
+
 import Login from './components/account/Login'
 import LoginOtherWay from './components/account/LoginOtherWay'
 import LoginUser from './components/account/LoginUser'
 import SignUp from './components/account/SignUp'
 import ResetPassword from './components/account/ResetPassword'
 
-import Main from './components/Main'
+import Settings from './components/settings/Settings'
+import GithubApp from './components/settings/GithubApp'
 
 Vue.use(VueRouter)
 
 const Foo = Vue.extend({
-  template: '<p>This is foo!</p>'
+  template: '<h2>This is foo!</h2>'
 })
 
 const router = new VueRouter({
@@ -48,8 +51,22 @@ const router = new VueRouter({
       component: Main,
       children: [
         {
-          path: 'foo',
+          path: '',
           component: Foo
+        },
+        {
+          path: 'dashboard',
+          component: Foo
+        },
+        {
+          path: 'settings',
+          component: Settings,
+          children: [
+            {
+              path: '',
+              component: GithubApp
+            }
+          ]
         }
       ]
     }

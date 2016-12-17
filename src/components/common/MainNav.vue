@@ -6,23 +6,23 @@
           <div class="profile-element" uib-dropdown>
             <a uib-dropdown-toggle href>
               <span class="clear">
-                BigSloth
+                Sloth
               </span>
             </a>
           </div>
         </li>
 
         <li ui-sref-active="active">
-          <a>
+          <router-link to="/dashboard">
             <i class="fa fa-laptop"></i>
-            <span class="nav-label">总览</span>
-          </a>
+            <span class="nav-label">仪表盘</span>
+          </router-link>
         </li>
         <li ui-sref-active="active">
-          <a>
+          <router-link to="/settings">
             <i class="fa fa-desktop"></i>
-            <span class="nav-label">存证</span>
-          </a>
+            <span class="nav-label">设置</span>
+          </router-link>
         </li>
       </ul>
     </div>
