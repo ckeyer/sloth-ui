@@ -10,10 +10,6 @@
               </span>
             </a>
           </div>
-          <div class="logo-element">
-            Sloth
-          </div>
-
         </li>
 
         <li ui-sref-active="active">

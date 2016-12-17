@@ -1,10 +1,10 @@
 <template>
   <div class="footer">
       <div class="pull-right">
-          10GB of <strong>250GB</strong> Free.
+          <strong>ckeyer</strong>
       </div>
       <div>
-          <strong>Copyright</strong> 北京魔镜科技有限公司 &copy; 2016-2018
+          <strong>Download you with my self. </strong> 
       </div>
   </div>
 </template>

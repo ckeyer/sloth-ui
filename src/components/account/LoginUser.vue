@@ -9,8 +9,6 @@
       <input type="password" class="form-control" placeholder="密码" required="" v-model="password">
     </div>
     <button type="submit" class="btn btn-primary" :class="{disabled: !allowSubmit}" @click="login">登入</button>
-    <button type="submit" class="btn btn-primary" @click="ping">Ping</button>
-    <button type="submit" class="btn btn-primary" @click="logout">Logout</button>
     <router-link :to="{path:'/resetpassword'}"><small>找回密码</small></router-link>
   </div>
 </template>
@@ -52,24 +50,6 @@ export default {
         vm.$store.dispatch('setUserAuth', resp.body.user_auth)
         vm.$store.dispatch('setAccount', resp.body.user)
         vm.$router.push('/')
-      })
-    },
-    ping: function () {
-      api.ping().end(function (err, resp) {
-        console.log('err', err)
-        console.log('resp', resp)
-        Alert.success(resp.body.message)
-      })
-    },
-    logout: function () {
-      let vm = this
-      api.logout().end(function (err, resp) {
-        vm.$store.dispatch('removeAccount')
-        vm.$store.dispatch('removeUserAuth')
-        if (!err || !Alert.check(vm, resp)) {
-          return
-        }
-        vm.$router.push('/login')
       })
     }
   }
