@@ -3,7 +3,7 @@
     <h3>Github APP</h3>
 
     <div class="ibox-content">
-      <form class="form-horizontal">
+      <div class="form-horizontal">
         <div class="form-group">
           <label class="col-sm-2 control-label">Client ID</label>
           <div class="col-sm-10">
@@ -29,7 +29,7 @@
             <button class="btn btn-primary" @click="submit">保存</button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -68,8 +68,10 @@ export default {
         gh_auth_callback_url: this.redirectUrl
       }
       console.log('submit', body)
+      let vm = this
       api.addSettings(body).end(function (err, resp) {
-        if (!Alert.check(err)) {
+        if (!Alert.check(vm, resp)) {
+          console.log('err', err)
           return
         }
       })
