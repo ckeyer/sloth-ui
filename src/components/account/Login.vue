@@ -13,7 +13,7 @@
           </ul>
 
           <div class="tab-content">
-              <div id="tab-3" class="tab-pane active">
+              <div class="tab-pane active">
                   <div class="panel-body">
                     <router-view></router-view>
                   </div>

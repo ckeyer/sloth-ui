@@ -48,5 +48,18 @@ export default {
       .send(body)
       .use(prefix)
       .set('Accept', 'application/json')
+  },
+  addSettings: (body) => {
+    return request.post('/settings')
+      .send(body)
+      .use(prefix)
+      .use(setSlothToken)
+      .set('Accept', 'application/json')
+  },
+  getSettings: (keys) => {
+    return request.get('/settings')
+      .query({key: keys.join(',')})
+      .use(prefix)
+      .use(setSlothToken)
   }
 }
