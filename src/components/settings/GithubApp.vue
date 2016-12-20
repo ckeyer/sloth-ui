@@ -49,7 +49,7 @@ export default {
   },
   created: function () {
     let vm = this
-    api.getSettings(['gh_client_id', 'gh_client_secret', 'gh_auth_callback_url']).end(function (err, resp) {
+    api.getSettings(['gh_client_id', 'gh_client_secret', 'gh_callback_url']).end(function (err, resp) {
       if (err) {
         console.log('get settings,', err)
         return
@@ -57,7 +57,7 @@ export default {
 
       vm.clientId = resp.body.gh_client_id
       vm.clientSecret = resp.body.gh_client_secret
-      vm.redirectUrl = resp.body.gh_auth_callback_url
+      vm.redirectUrl = resp.body.gh_callback_url
     })
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
       let body = {
         gh_client_id: this.clientId,
         gh_client_secret: this.clientSecret,
-        gh_auth_callback_url: this.redirectUrl
+        gh_callback_url: this.redirectUrl
       }
       console.log('submit', body)
       let vm = this
