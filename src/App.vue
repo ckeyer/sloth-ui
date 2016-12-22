@@ -12,7 +12,7 @@ export default {
     let vm = this
     api.status().end(function (err, resp) {
       if (err) {
-        Alert('服务器错误', '请求错误')
+        Alert.error('服务器错误', '请求错误')
         return
       }
 

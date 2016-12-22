@@ -14,10 +14,15 @@ import ResetPassword from './components/account/ResetPassword'
 import Settings from './components/settings/Settings'
 import GithubApp from './components/settings/GithubApp'
 
+// github callback.
+import Auth from './components/github/Auth'
+import Bind from './components/github/Bind'
+import Github from './components/github/Github'
+
 Vue.use(VueRouter)
 
-const Foo = Vue.extend({
-  template: '<h2>This is foo!</h2>'
+const TODO = Vue.extend({
+  template: '<h2>This is developing!</h2>'
 })
 
 const router = new VueRouter({
@@ -52,11 +57,11 @@ const router = new VueRouter({
       children: [
         {
           path: '',
-          component: Foo
+          component: TODO
         },
         {
           path: 'dashboard',
-          component: Foo
+          component: TODO
         },
         {
           path: 'settings',
@@ -69,21 +74,43 @@ const router = new VueRouter({
           ]
         }
       ]
+    },
+    {
+      path: '/github',
+      component: Github,
+      children: [
+        {
+          path: 'auth',
+          component: Auth
+        },
+        {
+          path: 'bind',
+          component: Bind
+        }
+      ]
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/login' &&
-    to.path !== '/login/others' &&
-    to.path !== '/signup') {
-    let ua = localStore.getItem('sloth.user_auth')
-    if (!ua) {
-      console.log('should login')
-      next('/login')
+  const whiteList = [
+    '/login',
+    '/login/others',
+    '/signup',
+    '/github/auth',
+    '/github/bind'
+  ]
+  for (var i in whiteList) {
+    if (to.path === whiteList[i]) {
+      next()
+      return
     }
   }
-  next()
+  let ua = localStore.getItem('sloth.user_auth')
+  if (!ua) {
+    console.log('should login')
+    next('/login')
+  }
 })
 
 export default router

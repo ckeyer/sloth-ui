@@ -39,10 +39,6 @@ export default {
       .use(prefix)
       .use(setSlothToken)
   },
-  getGHAccessURL: () => {
-    return request.get('/github/access_url')
-      .use(prefix)
-  },
   signup: (body) => {
     return request.post('/signup')
       .send(body)
@@ -61,5 +57,31 @@ export default {
       .query({key: keys.join(',')})
       .use(prefix)
       .use(setSlothToken)
+  },
+
+  // github's access url
+  getGHAccessURL: () => {
+    return request.get('/github/access_url')
+      .use(prefix)
+  },
+  getGHBindURL: () => {
+    return request.get('/github/bind_url')
+      .use(prefix)
+  },
+  // github callback.
+  githubAuth: (code) => {
+    return request.post('/github/auth')
+      .send({code: code})
+      .use(prefix)
+  },
+  githubBind: (code) => {
+    return request.post('/github/bind')
+      .send({code: code})
+      .use(prefix)
+  },
+  githubUnbind: (body) => {
+    return request.delete('/github/unbind')
+      .send(body)
+      .use(prefix)
   }
 }
