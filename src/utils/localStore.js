@@ -1,10 +1,13 @@
 export default {
   setItem: (key, data) => {
+    let str = ''
     if (typeof data === 'string') {
-      window.localStorage.setItem('sloth.user_auth', data)
+      str = data
     } else {
-      window.localStorage.setItem('sloth.user_auth', JSON.stringify(data))
+      str = JSON.stringify(data)
     }
+    window.localStorage.setItem(key, str)
+    console.log('setItem:', key, str)
   },
   getItem: (key) => {
     let data = window.localStorage.getItem(key)

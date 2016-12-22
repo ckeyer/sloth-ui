@@ -38,7 +38,6 @@ export default {
   },
   computed: {
     topClass: function () {
-      console.log('this.', this.$el)
       // if (this.$el.clientWidth < 700) {
       //   return 'body-small'
       // }

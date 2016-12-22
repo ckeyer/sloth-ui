@@ -18,7 +18,7 @@
             <span class="nav-label">仪表盘</span>
           </router-link>
         </li>
-        <li ui-sref-active="active">
+        <li ui-sref-active="active" v-show="isAdmin">
           <router-link to="/settings">
             <i class="fa fa-desktop"></i>
             <span class="nav-label">设置</span>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'main-nav',
   components: {
@@ -41,7 +43,17 @@ export default {
   },
   computed: {
     topClass: function () {
-    }
+    },
+    ...mapGetters({
+      isAdmin: 'isAdmin',
+      getUserAuth: 'getUserAuth',
+      getUser: 'getUser'
+    })
+  },
+  created: function () {
+    console.log('main-nav', 'is admin? ', this.isAdmin)
+    console.log('main-nav', 'is getUserAuth? ', this.getUserAuth)
+    console.log('getUser', this.getUser)
   }
 }
 </script>

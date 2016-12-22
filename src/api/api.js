@@ -9,12 +9,14 @@ const prefix = saPrefix(API_ROOT)
 
 const setSlothToken = function (req) {
   let ua = localStore.getItem('sloth.user_auth')
-  if (!ua) {
+  if (!ua || !ua.id || ua.id === '') {
     return req
   }
+  console.log('api', 'setSlothToken', ua)
   let apiKey = ua.id
   let token = ua.token
   let tsMsg = apiKey + ':' + parseInt(new Date().getTime() / 1000)
+  console.log('setSlothToken', tsMsg, token)
   let sign = CryptoJS.HmacSHA256(tsMsg, token).toString(CryptoJS.enc.Hex)
   return req.set('X-Signature', tsMsg + ':' + sign)
 }
@@ -45,6 +47,12 @@ export default {
       .use(prefix)
       .set('Accept', 'application/json')
   },
+  getUser: (id) => {
+    return request.get('/user/' + id)
+      .use(prefix)
+  },
+
+  // settings
   addSettings: (body) => {
     return request.post('/settings')
       .send(body)
