@@ -47,7 +47,8 @@ export default {
 
         vm.$store.dispatch('setUserAuth', resp.body.user_auth)
         vm.$store.dispatch('setAccount', resp.body.user)
-        vm.$router.push('/')
+        console.log('login: jump to /')
+        vm.$router.push('../')
       })
     }
   }

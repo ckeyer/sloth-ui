@@ -111,6 +111,7 @@ router.beforeEach((to, from, next) => {
     console.log('should login')
     next('/login')
   }
+  next()
 })
 
 export default router
